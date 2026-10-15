@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo Atelier — AI Content Workflow & Quality Assurance</title>
+  <meta name="description" content="AI Content generation pipeline with automated quality evaluation and brand compliance checks.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Top Navigation Header -->
+    <header class="top-header">
+      <div class="brand-wrapper">
+        <div class="brand-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <h1>Demo Atelier Studio <span class="brand-badge">Pipeline v1.0</span></h1>
+          <p>AI Content Generation &amp; Automated Quality Assurance</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="btnBrandRules" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          Brand Rules
+        </button>
+        <button id="themeToggleBtn" class="btn btn-icon" title="Toggle Dark/Light Mode">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Metrics Row -->
+    <section class="metrics-row" aria-label="Key Performance Indicators">
+      <div class="metric-card">
+        <div class="metric-content">
+          <span class="label">Total Products</span>
+          <div class="metric-value" id="statTotalProducts">3</div>
+          <div class="metric-sub">Catalog processed</div>
+        </div>
+        <div class="metric-icon-wrap">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-content">
+          <span class="label">Pass Rate</span>
+          <div class="metric-value" id="statPassRate">100%</div>
+          <div class="metric-sub">0 compliance errors</div>
+        </div>
+        <div class="metric-icon-wrap success">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-content">
+          <span class="label">Quality Checks</span>
+          <div class="metric-value" id="statChecksPassed">24 / 24</div>
+          <div class="metric-sub">8 tests per item</div>
+        </div>
+        <div class="metric-icon-wrap cyan">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-content">
+          <span class="label">Compliance Status</span>
+          <div class="metric-value" style="font-size: 1.4rem; color: var(--success);" id="statCompliance">READY</div>
+          <div class="metric-sub">Automated signoff</div>
+        </div>
+        <div class="metric-icon-wrap amber">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls & Product Selection Bar -->
+    <div class="controls-bar">
+      <div class="product-tabs" id="productTabs" role="tablist">
+        <!-- Dynamically rendered tabs -->
+      </div>
+
+      <div class="filter-group">
+        <div class="status-indicator">
+          <span class="status-dot"></span>
+          <span>Pipeline Synced</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Showcase Grid -->
+    <main class="showcase-grid">
+      <!-- Left Panel: Product Fact Sheet -->
+      <section class="panel-card" aria-label="Product Fact Sheet">
+        <div class="panel-header">
+          <span class="panel-title">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            Product Facts
+          </span>
+          <span class="panel-badge" id="productCategoryBadge">handbag</span>
+        </div>
+
+        <div class="product-media-card">
+          <img id="productImageDisplay" src="images/tote-001.jpg" alt="Product visual" class="product-main-img" />
+          <div class="image-overlay-badge">
+            <span class="badge-dot"></span>
+            <span id="imageCategoryLabel">handbag</span>
+          </div>
+        </div>
+
+        <div class="product-hero">
+          <div class="product-id-tag" id="productIdDisplay">#tote-001</div>
+          <h2 id="productNameDisplay">Marlowe Leather Tote</h2>
+          <div class="price-tag" id="productPriceDisplay">$120</div>
+        </div>
+
+        <div class="spec-list">
+          <div class="spec-item">
+            <label>Approved Materials</label>
+            <div class="pill-container" id="productMaterialsPills"></div>
+          </div>
+
+          <div class="spec-item">
+            <label>Available Colorways</label>
+            <div class="pill-container" id="productColorsPills"></div>
+          </div>
+
+          <div class="spec-item">
+            <label>Product Features &amp; Specs</label>
+            <ul class="features-check-list" id="productFeaturesList"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Center Panel: AI Generated Deliverables -->
+      <section class="panel-card" aria-label="Generated Marketing Assets">
+        <div class="panel-header">
+          <span class="panel-title">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            Generated Copy &amp; Media
+          </span>
+          <span class="panel-badge" style="background: rgba(99,102,241,0.2); color: var(--accent-primary-light);">AI Output</span>
+        </div>
+
+        <div class="deliverable-section">
+          <!-- Product Description -->
+          <div class="deliverable-card">
+            <div class="deliverable-top">
+              <span class="deliverable-label">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                Long-form Description
+              </span>
+              <button class="copy-btn" id="copyDescBtn" data-target="descText">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy
+              </button>
+            </div>
+            <p class="prose-content" id="descText"></p>
+            <div class="meta-stats-row">
+              <span>Word count: <strong id="descWordCount">64</strong></span>
+              <span class="meta-badge">Allowed: 40-90 words</span>
+            </div>
+          </div>
+
+          <!-- Social Media Captions -->
+          <div class="deliverable-card">
+            <div class="deliverable-top">
+              <span class="deliverable-label">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                Social Media Captions (3 Angles)
+              </span>
+            </div>
+            <div class="captions-stack" id="captionsStack"></div>
+          </div>
+
+          <!-- Ad Concepts -->
+          <div class="deliverable-card">
+            <div class="deliverable-top">
+              <span class="deliverable-label">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Paid Ad Campaign Concepts
+              </span>
+            </div>
+            <div class="captions-stack" id="adConceptsStack"></div>
+          </div>
+
+          <!-- Image Generation Prompt & Preview -->
+          <div class="deliverable-card">
+            <div class="deliverable-top">
+              <span class="deliverable-label">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                Product Photography &amp; AI Visual
+              </span>
+              <button class="copy-btn" id="copyPromptBtn" data-target="imagePromptText">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy Prompt
+              </button>
+            </div>
+            <div class="image-preview-container">
+              <div class="prompt-split">
+                <img id="promptImagePreview" src="images/tote-001.jpg" alt="Product Photography Visual" class="prompt-result-img" />
+                <div class="image-prompt-box">
+                  <p class="prompt-text" id="imagePromptText"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Panel: Quality Checks -->
+      <section class="panel-card" aria-label="Quality Checks Matrix">
+        <div class="panel-header">
+          <span class="panel-title">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            Automated QA Matrix
+          </span>
+          <span class="panel-badge" style="background: var(--success-bg); color: var(--success);">8 / 8 Passing</span>
+        </div>
+
+        <div class="qa-checklist" id="qaChecklist"></div>
+      </section>
+    </main>
+
+    <!-- Interactive Copy Compliance Sandbox -->
+    <section class="sandbox-section" aria-label="Interactive Copy Compliance Sandbox">
+      <div class="sandbox-header">
+        <div class="brand-wrapper">
+          <div class="brand-icon-box" style="width: 36px; height: 36px;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+          </div>
+          <div>
+            <h3 style="font-family: var(--font-display); font-size: 1.15rem;">Live Compliance Sandbox</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Type or paste custom product copy to test instantly against brand rules</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sandbox-input-area">
+        <div class="textarea-wrap">
+          <textarea id="sandboxInput" placeholder="Try typing: The Marlowe Leather Tote is guaranteed to be 100% life-changing like Gucci..."></textarea>
+        </div>
+        <div class="sandbox-results" id="sandboxResults">
+          <div style="font-size: 0.85rem; color: var(--text-dim);">Live results will appear as you type...</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Brand Rules Modal -->
+  <div class="modal-overlay" id="brandRulesModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Brand Compliance Rules</h3>
+        <button class="close-modal-btn" id="closeModalBtn">&times;</button>
+      </div>
+
+      <div class="rule-group">
+        <h4>Brand Identity</h4>
+        <p style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 6px;"><strong>Brand:</strong> Demo Atelier</p>
+        <p style="font-size: 0.9rem; color: var(--text-muted);"><strong>Tone:</strong> warm, confident, simple language, no hype</p>
+      </div>
+
+      <div class="rule-group">
+        <h4>Content Limits</h4>
+        <div class="pill-container">
+          <span class="pill">Description: 40-90 words</span>
+          <span class="pill">Caption max: 220 characters</span>
+          <span class="pill">Max hashtags: 5</span>
+          <span class="pill">Max exclamation marks: 1</span>
+        </div>
+      </div>
+
+      <div class="rule-group">
+        <h4>Strictly Banned Phrases</h4>
+        <div class="pill-container" id="bannedPhrasesContainer"></div>
+      </div>
+
+      <div class="rule-group">
+        <h4>Trademark Watchlist</h4>
+        <div class="pill-container" id="trademarkContainer"></div>
+      </div>
+
+      <div class="rule-group">
+        <h4>Allowed Materials Vocabulary</h4>
+        <div class="pill-container" id="materialsContainer"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

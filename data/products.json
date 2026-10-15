@@ -1,0 +1,29 @@
+[
+  {
+    "id": "tote-001",
+    "name": "Marlowe Leather Tote",
+    "category": "handbag",
+    "materials": ["vegetable-tanned leather", "cotton lining"],
+    "colors": ["tan", "black"],
+    "price_usd": 120,
+    "features": ["zip closure", "inner pocket", "fits a 13-inch laptop"]
+  },
+  {
+    "id": "sandal-002",
+    "name": "Isla Block-Heel Sandal",
+    "category": "footwear",
+    "materials": ["suede", "rubber sole"],
+    "colors": ["sand", "olive"],
+    "price_usd": 85,
+    "features": ["4 cm block heel", "adjustable ankle strap", "cushioned insole"]
+  },
+  {
+    "id": "scarf-003",
+    "name": "Aria Printed Silk Scarf",
+    "category": "accessory",
+    "materials": ["silk"],
+    "colors": ["blue floral", "red geometric"],
+    "price_usd": 45,
+    "features": ["70 x 70 cm", "hand-rolled edges"]
+  }
+]

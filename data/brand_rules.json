@@ -1,0 +1,28 @@
+{
+  "brand_name": "Demo Atelier",
+  "tone": "warm, confident, simple language, no hype",
+  "limits": {
+    "description_words": [40, 90],
+    "caption_chars": 220,
+    "max_hashtags": 5,
+    "max_exclamations_per_caption": 1
+  },
+  "banned_phrases": [
+    "best in the world",
+    "guaranteed",
+    "100%",
+    "miracle",
+    "life-changing",
+    "cheap",
+    "limited time only"
+  ],
+  "trademark_watchlist": [
+    "gucci", "prada", "chanel", "louis vuitton", "nike", "adidas",
+    "hermes", "disney", "zara"
+  ],
+  "materials_vocab": [
+    "leather", "suede", "silk", "cotton", "linen", "wool", "cashmere",
+    "canvas", "nylon", "polyester", "satin", "velvet", "denim", "rubber",
+    "vegan leather", "patent leather"
+  ]
+}
